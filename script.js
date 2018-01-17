@@ -20,9 +20,9 @@ startButton.addEventListener('click', function () {
 
     start: function() {
       Score.resetScore();
-      for (var i = 0; i < holes.length; i++) {
-        holes[i].addEventListener('click', function() {
-          Game.handler(event, i);
+      for (var i = 0; i < moles.length; i++) {
+        moles[i].addEventListener('click', function() {
+          Game.handler();
         });
       }
       intervalContainer = setInterval(function() {
@@ -41,19 +41,9 @@ startButton.addEventListener('click', function () {
       number = Math.floor(number);
       return(number)
     },
-    handler: function(event, position) {
-      let holeNumberClassname = event.path[0].classList[1];
-      console.log(event.path[0].classList);
-      let holeNumber = holeNumberClassname.replace('hole', '');
-      holeNumber = parseInt(holeNumber);
-      console.log('Hole: ' + holeNumber);
-      console.log('Mole ' + Mole.getPosition());
-      if (holeNumber == Mole.getPosition()) {
-        Score.addOne();
-      }
-      else if (holeNumber != Mole.getPosition()) {
-        Score.removeOne();
-      }
+    handler: function() {
+      Score.addOne();
+      Mole.hide();
       Score.show();
     },
   }
